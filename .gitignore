@@ -1,0 +1,14 @@
+.venv/
+.pytest_cache/
+.tox/
+.coverage/
+.eggs/
+.mypy_cache/
+.nox/
+.build/
+.lock/
+.cache/
+.dist/
+.egg-info/
+.install/
+.pytest_/
