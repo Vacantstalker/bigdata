@@ -12,3 +12,13 @@
 .egg-info/
 .install/
 .pytest_/
+
+etc/
+root/
+test/
+
+config.py
+settings.yml
+test01.py
+
+clickhouse-driver/
