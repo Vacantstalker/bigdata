@@ -1,0 +1,682 @@
+2025-05-18 15:49:00,285 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 15:49:00,287 - INFO - 开始计算CPI...
+2025-05-18 15:49:00,410 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 38, in calculate_cpi
+    base_prices = client.execute(
+        base_query,
+        {'start_date': '2023-01-01', 'end_date': '2023-12-31'}
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 382, in execute
+    rv = self.process_ordinary_query(
+        query, params=params, with_column_types=with_column_types,
+    ...<2 lines>...
+        columnar=columnar
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 580, in process_ordinary_query
+    return self.receive_result(with_column_types=with_column_types,
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               columnar=columnar)
+                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 212, in receive_result
+    return result.get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\numpy\result.py", line 36, in get_result
+    for packet in self.packet_generator:
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 228, in packet_generator
+    packet = self.receive_packet()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 245, in receive_packet
+    raise packet.exception
+clickhouse_driver.errors.ServerException: Code: 60.
+DB::Exception: Table default.price_data does not exist. Stack trace:
+
+0. ./build_docker/./contrib/llvm-project/libcxx/include/exception:134: Poco::Exception::Exception(String const&, int) @ 0x0000000014f01e32 in /clickhouse/bin/clickhouse
+1. ./build_docker/./src/Common/Exception.cpp:99: DB::Exception::Exception(DB::Exception::MessageMasked&&, int, bool) @ 0x000000000b683077 in /clickhouse/bin/clickhouse
+2. DB::Exception::Exception<String, String>(int, FormatStringHelperImpl<std::type_identity<String>::type, std::type_identity<String>::type>, String&&, String&&) @ 0x0000000006c528fd in /clickhouse/bin/clickhouse
+3. ./build_docker/./src/Databases/IDatabase.cpp:0: DB::IDatabase::getTable(String const&, std::shared_ptr<DB::Context const>) const @ 0x000000001061703e in /clickhouse/bin/clickhouse
+4. ./build_docker/./contrib/llvm-project/libcxx/include/__utility/swap.h:37: DB::DatabaseCatalog::getTableImpl(DB::StorageID const&, std::shared_ptr<DB::Context const>, std::optional<DB::Exception>*) const @ 0x0000000010806125 in /clickhouse/bin/clickhouse
+5. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/shared_ptr.h:801: DB::DatabaseCatalog::getTable(DB::StorageID const&, std::shared_ptr<DB::Context const>) const @ 0x000000001080cd48 in /clickhouse/bin/clickhouse
+6. ./build_docker/./src/Interpreters/JoinedTables.cpp:0: DB::JoinedTables::getLeftTableStorage() @ 0x0000000011001228 in /clickhouse/bin/clickhouse
+7. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:0: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>) @ 0x0000000010f33792 in /clickhouse/bin/clickhouse
+8. ./build_docker/./contrib/llvm-project/libcxx/include/optional:260: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010f32451 in /clickhouse/bin/clickhouse
+9. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:257: DB::InterpreterSelectWithUnionQuery::buildCurrentChildInterpreter(std::shared_ptr<DB::IAST> const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc77a6 in /clickhouse/bin/clickhouse
+10. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:152: DB::InterpreterSelectWithUnionQuery::InterpreterSelectWithUnionQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc5720 in /clickhouse/bin/clickhouse
+11. ./build_docker/./contrib/llvm-project/libcxx/include/vector:434: std::__unique_if<DB::InterpreterSelectWithUnionQuery>::__unique_single std::make_unique[abi:v15000]<DB::InterpreterSelectWithUnionQuery, std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&>(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&) @ 0x0000000010ef6515 in /clickhouse/bin/clickhouse
+12. ./build_docker/./src/Interpreters/InterpreterFactory.cpp:0: DB::InterpreterFactory::get(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&) @ 0x0000000010ef5c7e in /clickhouse/bin/clickhouse
+13. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:302: DB::executeQueryImpl(char const*, char const*, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, DB::ReadBuffer*) @ 0x00000000112afb50 in /clickhouse/bin/clickhouse
+14. ./build_docker/./src/Interpreters/executeQuery.cpp:1311: DB::executeQuery(String const&, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum) @ 0x00000000112ac74f in /clickhouse/bin/clickhouse
+15. ./build_docker/./src/Server/TCPHandler.cpp:0: DB::TCPHandler::runImpl() @ 0x0000000012010e8b in /clickhouse/bin/clickhouse
+16. ./build_docker/./src/Server/TCPHandler.cpp:2161: DB::TCPHandler::run() @ 0x0000000012022d59 in /clickhouse/bin/clickhouse
+17. ./build_docker/./base/poco/Net/src/TCPServerConnection.cpp:57: Poco::Net::TCPServerConnection::start() @ 0x0000000014de8e67 in /clickhouse/bin/clickhouse
+18. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:48: Poco::Net::TCPServerDispatcher::run() @ 0x0000000014de934d in /clickhouse/bin/clickhouse
+19. ./build_docker/./base/poco/Foundation/src/ThreadPool.cpp:202: Poco::PooledThread::run() @ 0x0000000014f55da7 in /clickhouse/bin/clickhouse
+20. ./build_docker/./base/poco/Foundation/include/Poco/SharedPtr.h:139: Poco::ThreadImpl::runnableEntry(void*) @ 0x0000000014f538c2 in /clickhouse/bin/clickhouse
+21. ? @ 0x00007fcad7280609 in ?
+22. ? @ 0x00007fcad71a5353 in ?
+
+2025-05-18 15:49:00,420 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 150, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 38, in calculate_cpi
+    base_prices = client.execute(
+        base_query,
+        {'start_date': '2023-01-01', 'end_date': '2023-12-31'}
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 382, in execute
+    rv = self.process_ordinary_query(
+        query, params=params, with_column_types=with_column_types,
+    ...<2 lines>...
+        columnar=columnar
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 580, in process_ordinary_query
+    return self.receive_result(with_column_types=with_column_types,
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               columnar=columnar)
+                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 212, in receive_result
+    return result.get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\numpy\result.py", line 36, in get_result
+    for packet in self.packet_generator:
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 228, in packet_generator
+    packet = self.receive_packet()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 245, in receive_packet
+    raise packet.exception
+clickhouse_driver.errors.ServerException: Code: 60.
+DB::Exception: Table default.price_data does not exist. Stack trace:
+
+0. ./build_docker/./contrib/llvm-project/libcxx/include/exception:134: Poco::Exception::Exception(String const&, int) @ 0x0000000014f01e32 in /clickhouse/bin/clickhouse
+1. ./build_docker/./src/Common/Exception.cpp:99: DB::Exception::Exception(DB::Exception::MessageMasked&&, int, bool) @ 0x000000000b683077 in /clickhouse/bin/clickhouse
+2. DB::Exception::Exception<String, String>(int, FormatStringHelperImpl<std::type_identity<String>::type, std::type_identity<String>::type>, String&&, String&&) @ 0x0000000006c528fd in /clickhouse/bin/clickhouse
+3. ./build_docker/./src/Databases/IDatabase.cpp:0: DB::IDatabase::getTable(String const&, std::shared_ptr<DB::Context const>) const @ 0x000000001061703e in /clickhouse/bin/clickhouse
+4. ./build_docker/./contrib/llvm-project/libcxx/include/__utility/swap.h:37: DB::DatabaseCatalog::getTableImpl(DB::StorageID const&, std::shared_ptr<DB::Context const>, std::optional<DB::Exception>*) const @ 0x0000000010806125 in /clickhouse/bin/clickhouse
+5. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/shared_ptr.h:801: DB::DatabaseCatalog::getTable(DB::StorageID const&, std::shared_ptr<DB::Context const>) const @ 0x000000001080cd48 in /clickhouse/bin/clickhouse
+6. ./build_docker/./src/Interpreters/JoinedTables.cpp:0: DB::JoinedTables::getLeftTableStorage() @ 0x0000000011001228 in /clickhouse/bin/clickhouse
+7. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:0: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>) @ 0x0000000010f33792 in /clickhouse/bin/clickhouse
+8. ./build_docker/./contrib/llvm-project/libcxx/include/optional:260: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010f32451 in /clickhouse/bin/clickhouse
+9. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:257: DB::InterpreterSelectWithUnionQuery::buildCurrentChildInterpreter(std::shared_ptr<DB::IAST> const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc77a6 in /clickhouse/bin/clickhouse
+10. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:152: DB::InterpreterSelectWithUnionQuery::InterpreterSelectWithUnionQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc5720 in /clickhouse/bin/clickhouse
+11. ./build_docker/./contrib/llvm-project/libcxx/include/vector:434: std::__unique_if<DB::InterpreterSelectWithUnionQuery>::__unique_single std::make_unique[abi:v15000]<DB::InterpreterSelectWithUnionQuery, std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&>(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&) @ 0x0000000010ef6515 in /clickhouse/bin/clickhouse
+12. ./build_docker/./src/Interpreters/InterpreterFactory.cpp:0: DB::InterpreterFactory::get(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&) @ 0x0000000010ef5c7e in /clickhouse/bin/clickhouse
+13. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:302: DB::executeQueryImpl(char const*, char const*, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, DB::ReadBuffer*) @ 0x00000000112afb50 in /clickhouse/bin/clickhouse
+14. ./build_docker/./src/Interpreters/executeQuery.cpp:1311: DB::executeQuery(String const&, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum) @ 0x00000000112ac74f in /clickhouse/bin/clickhouse
+15. ./build_docker/./src/Server/TCPHandler.cpp:0: DB::TCPHandler::runImpl() @ 0x0000000012010e8b in /clickhouse/bin/clickhouse
+16. ./build_docker/./src/Server/TCPHandler.cpp:2161: DB::TCPHandler::run() @ 0x0000000012022d59 in /clickhouse/bin/clickhouse
+17. ./build_docker/./base/poco/Net/src/TCPServerConnection.cpp:57: Poco::Net::TCPServerConnection::start() @ 0x0000000014de8e67 in /clickhouse/bin/clickhouse
+18. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:48: Poco::Net::TCPServerDispatcher::run() @ 0x0000000014de934d in /clickhouse/bin/clickhouse
+19. ./build_docker/./base/poco/Foundation/src/ThreadPool.cpp:202: Poco::PooledThread::run() @ 0x0000000014f55da7 in /clickhouse/bin/clickhouse
+20. ./build_docker/./base/poco/Foundation/include/Poco/SharedPtr.h:139: Poco::ThreadImpl::runnableEntry(void*) @ 0x0000000014f538c2 in /clickhouse/bin/clickhouse
+21. ? @ 0x00007fcad7280609 in ?
+22. ? @ 0x00007fcad71a5353 in ?
+
+2025-05-18 16:00:34,534 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:00:34,534 - INFO - 开始计算CPI...
+2025-05-18 16:00:41,443 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:00:46,061 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:00:46,102 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 67, in calculate_cpi
+    weights = client.execute(weight_query)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 382, in execute
+    rv = self.process_ordinary_query(
+        query, params=params, with_column_types=with_column_types,
+    ...<2 lines>...
+        columnar=columnar
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 580, in process_ordinary_query
+    return self.receive_result(with_column_types=with_column_types,
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               columnar=columnar)
+                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 212, in receive_result
+    return result.get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\numpy\result.py", line 36, in get_result
+    for packet in self.packet_generator:
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 228, in packet_generator
+    packet = self.receive_packet()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 245, in receive_packet
+    raise packet.exception
+clickhouse_driver.errors.ServerException: Code: 386.
+DB::Exception: There is no supertype for types String, UInt8 because some of them are String/FixedString and some of them are not: while executing 'FUNCTION equals(hierarchy : 1, 3 : 3) -> equals(hierarchy, 3) UInt8 : 4'. Stack trace:
+
+0. ./build_docker/./contrib/llvm-project/libcxx/include/exception:134: Poco::Exception::Exception(String const&, int) @ 0x0000000014f01e32 in /clickhouse/bin/clickhouse
+1. ./build_docker/./src/Common/Exception.cpp:99: DB::Exception::Exception(DB::Exception::MessageMasked&&, int, bool) @ 0x000000000b683077 in /clickhouse/bin/clickhouse
+2. DB::Exception::Exception<String, std::basic_string_view<char, std::char_traits<char>>&>(int, FormatStringHelperImpl<std::type_identity<String>::type, std::type_identity<std::basic_string_view<char, std::char_traits<char>>&>::type>, String&&, std::basic_string_view<char, std::char_traits<char>>&) @ 0x000000000a38c5ec in /clickhouse/bin/clickhouse
+3. ./build_docker/./src/DataTypes/getLeastSupertype.cpp:0: std::shared_ptr<DB::IDataType const> DB::(anonymous namespace)::throwOrReturn<(DB::LeastSupertypeOnError)0, std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>>>(std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>> const&, std::basic_string_view<char, std::char_traits<char>>, int) @ 0x000000001053a97d in /clickhouse/bin/clickhouse
+4. ./build_docker/./src/DataTypes/getLeastSupertype.cpp:473: std::shared_ptr<DB::IDataType const> DB::getLeastSupertype<(DB::LeastSupertypeOnError)0>(std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>> const&) @ 0x000000001053d85a in /clickhouse/bin/clickhouse
+5. DB::FunctionComparison<DB::EqualsOp, DB::NameEquals>::executeGeneric(DB::ColumnWithTypeAndName const&, DB::ColumnWithTypeAndName const&) const @ 0x00000000081842f8 in /clickhouse/bin/clickhouse
+6. DB::FunctionComparison<DB::EqualsOp, DB::NameEquals>::executeImpl(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long) const @ 0x0000000008174e72 in /clickhouse/bin/clickhouse
+7. DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long) const @ 0x0000000006c5196e in /clickhouse/bin/clickhouse
+8. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe2f0c5 in /clickhouse/bin/clickhouse
+9. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::IExecutableFunction::executeWithoutSparseColumns(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe2f96f in /clickhouse/bin/clickhouse
+10. ./build_docker/./src/Functions/IFunction.cpp:0: DB::IExecutableFunction::execute(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe30c0b in /clickhouse/bin/clickhouse
+11. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::ExpressionActions::execute(DB::Block&, unsigned long&, bool) const @ 0x0000000010868fc1 in /clickhouse/bin/clickhouse
+12. ./build_docker/./contrib/llvm-project/libcxx/include/vector:537: DB::ExpressionActions::execute(DB::Block&, bool) const @ 0x0000000010869cf8 in /clickhouse/bin/clickhouse
+13. ./build_docker/./src/Interpreters/ExpressionAnalyzer.cpp:0: DB::ExpressionAnalysisResult::ExpressionAnalysisResult(DB::SelectQueryExpressionAnalyzer&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, bool, bool, bool, std::shared_ptr<DB::FilterDAGInfo> const&, std::shared_ptr<DB::FilterDAGInfo> const&, DB::Block const&) @ 0x000000001088a7fd in /clickhouse/bin/clickhouse
+14. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:946: DB::InterpreterSelectQuery::getSampleBlockImpl() @ 0x0000000010f40b0b in /clickhouse/bin/clickhouse
+15. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:769: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>)::$_0::operator()(bool) const @ 0x0000000010f3a9e0 in /clickhouse/bin/clickhouse
+16. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:0: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>) @ 0x0000000010f354f1 in /clickhouse/bin/clickhouse
+17. ./build_docker/./contrib/llvm-project/libcxx/include/optional:260: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010f32451 in /clickhouse/bin/clickhouse
+18. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:257: DB::InterpreterSelectWithUnionQuery::buildCurrentChildInterpreter(std::shared_ptr<DB::IAST> const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc77a6 in /clickhouse/bin/clickhouse
+19. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:152: DB::InterpreterSelectWithUnionQuery::InterpreterSelectWithUnionQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc5720 in /clickhouse/bin/clickhouse
+20. ./build_docker/./contrib/llvm-project/libcxx/include/vector:434: std::__unique_if<DB::InterpreterSelectWithUnionQuery>::__unique_single std::make_unique[abi:v15000]<DB::InterpreterSelectWithUnionQuery, std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&>(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&) @ 0x0000000010ef6515 in /clickhouse/bin/clickhouse
+21. ./build_docker/./src/Interpreters/InterpreterFactory.cpp:0: DB::InterpreterFactory::get(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&) @ 0x0000000010ef5c7e in /clickhouse/bin/clickhouse
+22. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:302: DB::executeQueryImpl(char const*, char const*, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, DB::ReadBuffer*) @ 0x00000000112afb50 in /clickhouse/bin/clickhouse
+23. ./build_docker/./src/Interpreters/executeQuery.cpp:1311: DB::executeQuery(String const&, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum) @ 0x00000000112ac74f in /clickhouse/bin/clickhouse
+24. ./build_docker/./src/Server/TCPHandler.cpp:0: DB::TCPHandler::runImpl() @ 0x0000000012010e8b in /clickhouse/bin/clickhouse
+25. ./build_docker/./src/Server/TCPHandler.cpp:2161: DB::TCPHandler::run() @ 0x0000000012022d59 in /clickhouse/bin/clickhouse
+26. ./build_docker/./base/poco/Net/src/TCPServerConnection.cpp:57: Poco::Net::TCPServerConnection::start() @ 0x0000000014de8e67 in /clickhouse/bin/clickhouse
+27. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:48: Poco::Net::TCPServerDispatcher::run() @ 0x0000000014de934d in /clickhouse/bin/clickhouse
+28. ./build_docker/./base/poco/Foundation/src/ThreadPool.cpp:202: Poco::PooledThread::run() @ 0x0000000014f55da7 in /clickhouse/bin/clickhouse
+29. ./build_docker/./base/poco/Foundation/include/Poco/SharedPtr.h:139: Poco::ThreadImpl::runnableEntry(void*) @ 0x0000000014f538c2 in /clickhouse/bin/clickhouse
+30. ? @ 0x00007fcad7280609 in ?
+31. ? @ 0x00007fcad71a5353 in ?
+
+2025-05-18 16:00:46,109 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 150, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 67, in calculate_cpi
+    weights = client.execute(weight_query)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 382, in execute
+    rv = self.process_ordinary_query(
+        query, params=params, with_column_types=with_column_types,
+    ...<2 lines>...
+        columnar=columnar
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 580, in process_ordinary_query
+    return self.receive_result(with_column_types=with_column_types,
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               columnar=columnar)
+                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 212, in receive_result
+    return result.get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\numpy\result.py", line 36, in get_result
+    for packet in self.packet_generator:
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 228, in packet_generator
+    packet = self.receive_packet()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\clickhouse_driver\client.py", line 245, in receive_packet
+    raise packet.exception
+clickhouse_driver.errors.ServerException: Code: 386.
+DB::Exception: There is no supertype for types String, UInt8 because some of them are String/FixedString and some of them are not: while executing 'FUNCTION equals(hierarchy : 1, 3 : 3) -> equals(hierarchy, 3) UInt8 : 4'. Stack trace:
+
+0. ./build_docker/./contrib/llvm-project/libcxx/include/exception:134: Poco::Exception::Exception(String const&, int) @ 0x0000000014f01e32 in /clickhouse/bin/clickhouse
+1. ./build_docker/./src/Common/Exception.cpp:99: DB::Exception::Exception(DB::Exception::MessageMasked&&, int, bool) @ 0x000000000b683077 in /clickhouse/bin/clickhouse
+2. DB::Exception::Exception<String, std::basic_string_view<char, std::char_traits<char>>&>(int, FormatStringHelperImpl<std::type_identity<String>::type, std::type_identity<std::basic_string_view<char, std::char_traits<char>>&>::type>, String&&, std::basic_string_view<char, std::char_traits<char>>&) @ 0x000000000a38c5ec in /clickhouse/bin/clickhouse
+3. ./build_docker/./src/DataTypes/getLeastSupertype.cpp:0: std::shared_ptr<DB::IDataType const> DB::(anonymous namespace)::throwOrReturn<(DB::LeastSupertypeOnError)0, std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>>>(std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>> const&, std::basic_string_view<char, std::char_traits<char>>, int) @ 0x000000001053a97d in /clickhouse/bin/clickhouse
+4. ./build_docker/./src/DataTypes/getLeastSupertype.cpp:473: std::shared_ptr<DB::IDataType const> DB::getLeastSupertype<(DB::LeastSupertypeOnError)0>(std::vector<std::shared_ptr<DB::IDataType const>, std::allocator<std::shared_ptr<DB::IDataType const>>> const&) @ 0x000000001053d85a in /clickhouse/bin/clickhouse
+5. DB::FunctionComparison<DB::EqualsOp, DB::NameEquals>::executeGeneric(DB::ColumnWithTypeAndName const&, DB::ColumnWithTypeAndName const&) const @ 0x00000000081842f8 in /clickhouse/bin/clickhouse
+6. DB::FunctionComparison<DB::EqualsOp, DB::NameEquals>::executeImpl(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long) const @ 0x0000000008174e72 in /clickhouse/bin/clickhouse
+7. DB::FunctionToExecutableFunctionAdaptor::executeImpl(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long) const @ 0x0000000006c5196e in /clickhouse/bin/clickhouse
+8. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::IExecutableFunction::executeWithoutLowCardinalityColumns(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe2f0c5 in /clickhouse/bin/clickhouse
+9. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::IExecutableFunction::executeWithoutSparseColumns(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe2f96f in /clickhouse/bin/clickhouse
+10. ./build_docker/./src/Functions/IFunction.cpp:0: DB::IExecutableFunction::execute(std::vector<DB::ColumnWithTypeAndName, std::allocator<DB::ColumnWithTypeAndName>> const&, std::shared_ptr<DB::IDataType const> const&, unsigned long, bool) const @ 0x000000000fe30c0b in /clickhouse/bin/clickhouse
+11. ./build_docker/./contrib/boost/boost/smart_ptr/intrusive_ptr.hpp:117: DB::ExpressionActions::execute(DB::Block&, unsigned long&, bool) const @ 0x0000000010868fc1 in /clickhouse/bin/clickhouse
+12. ./build_docker/./contrib/llvm-project/libcxx/include/vector:537: DB::ExpressionActions::execute(DB::Block&, bool) const @ 0x0000000010869cf8 in /clickhouse/bin/clickhouse
+13. ./build_docker/./src/Interpreters/ExpressionAnalyzer.cpp:0: DB::ExpressionAnalysisResult::ExpressionAnalysisResult(DB::SelectQueryExpressionAnalyzer&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, bool, bool, bool, std::shared_ptr<DB::FilterDAGInfo> const&, std::shared_ptr<DB::FilterDAGInfo> const&, DB::Block const&) @ 0x000000001088a7fd in /clickhouse/bin/clickhouse
+14. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:946: DB::InterpreterSelectQuery::getSampleBlockImpl() @ 0x0000000010f40b0b in /clickhouse/bin/clickhouse
+15. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:769: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>)::$_0::operator()(bool) const @ 0x0000000010f3a9e0 in /clickhouse/bin/clickhouse
+16. ./build_docker/./src/Interpreters/InterpreterSelectQuery.cpp:0: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, std::optional<DB::Pipe>, std::shared_ptr<DB::IStorage> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&, std::shared_ptr<DB::StorageInMemoryMetadata const> const&, std::shared_ptr<DB::PreparedSets>) @ 0x0000000010f354f1 in /clickhouse/bin/clickhouse
+17. ./build_docker/./contrib/llvm-project/libcxx/include/optional:260: DB::InterpreterSelectQuery::InterpreterSelectQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context> const&, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010f32451 in /clickhouse/bin/clickhouse
+18. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:257: DB::InterpreterSelectWithUnionQuery::buildCurrentChildInterpreter(std::shared_ptr<DB::IAST> const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc77a6 in /clickhouse/bin/clickhouse
+19. ./build_docker/./src/Interpreters/InterpreterSelectWithUnionQuery.cpp:152: DB::InterpreterSelectWithUnionQuery::InterpreterSelectWithUnionQuery(std::shared_ptr<DB::IAST> const&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&, std::vector<String, std::allocator<String>> const&) @ 0x0000000010fc5720 in /clickhouse/bin/clickhouse
+20. ./build_docker/./contrib/llvm-project/libcxx/include/vector:434: std::__unique_if<DB::InterpreterSelectWithUnionQuery>::__unique_single std::make_unique[abi:v15000]<DB::InterpreterSelectWithUnionQuery, std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&>(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>&, DB::SelectQueryOptions const&) @ 0x0000000010ef6515 in /clickhouse/bin/clickhouse
+21. ./build_docker/./src/Interpreters/InterpreterFactory.cpp:0: DB::InterpreterFactory::get(std::shared_ptr<DB::IAST>&, std::shared_ptr<DB::Context>, DB::SelectQueryOptions const&) @ 0x0000000010ef5c7e in /clickhouse/bin/clickhouse
+22. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:302: DB::executeQueryImpl(char const*, char const*, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, DB::ReadBuffer*) @ 0x00000000112afb50 in /clickhouse/bin/clickhouse
+23. ./build_docker/./src/Interpreters/executeQuery.cpp:1311: DB::executeQuery(String const&, std::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum) @ 0x00000000112ac74f in /clickhouse/bin/clickhouse
+24. ./build_docker/./src/Server/TCPHandler.cpp:0: DB::TCPHandler::runImpl() @ 0x0000000012010e8b in /clickhouse/bin/clickhouse
+25. ./build_docker/./src/Server/TCPHandler.cpp:2161: DB::TCPHandler::run() @ 0x0000000012022d59 in /clickhouse/bin/clickhouse
+26. ./build_docker/./base/poco/Net/src/TCPServerConnection.cpp:57: Poco::Net::TCPServerConnection::start() @ 0x0000000014de8e67 in /clickhouse/bin/clickhouse
+27. ./build_docker/./contrib/llvm-project/libcxx/include/__memory/unique_ptr.h:48: Poco::Net::TCPServerDispatcher::run() @ 0x0000000014de934d in /clickhouse/bin/clickhouse
+28. ./build_docker/./base/poco/Foundation/src/ThreadPool.cpp:202: Poco::PooledThread::run() @ 0x0000000014f55da7 in /clickhouse/bin/clickhouse
+29. ./build_docker/./base/poco/Foundation/include/Poco/SharedPtr.h:139: Poco::ThreadImpl::runnableEntry(void*) @ 0x0000000014f538c2 in /clickhouse/bin/clickhouse
+30. ? @ 0x00007fcad7280609 in ?
+31. ? @ 0x00007fcad71a5353 in ?
+
+2025-05-18 16:08:55,375 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:08:55,375 - INFO - 开始计算CPI...
+2025-05-18 16:09:00,394 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:09:04,368 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:09:04,494 - INFO - 获取到 225 个品类权重
+2025-05-18 16:09:04,495 - INFO - 开始合并计算CPI...
+2025-05-18 16:09:04,528 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: unsupported operand type(s) for /: 'float' and 'numpy.str_'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 79, in calculate_cpi
+    merged['price_index'] = (merged['avg_price'] / merged['base_price']) * 100
+                             ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 210, in __truediv__
+    return self._arith_method(other, operator.truediv)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for /: 'float' and 'numpy.str_'
+2025-05-18 16:09:04,535 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: unsupported operand type(s) for /: 'float' and 'numpy.str_'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 150, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 79, in calculate_cpi
+    merged['price_index'] = (merged['avg_price'] / merged['base_price']) * 100
+                             ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 210, in __truediv__
+    return self._arith_method(other, operator.truediv)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for /: 'float' and 'numpy.str_'
+2025-05-18 16:11:14,538 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:11:14,538 - INFO - 开始计算CPI...
+2025-05-18 16:11:18,687 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:11:22,688 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:11:22,751 - INFO - 获取到 225 个品类权重
+2025-05-18 16:11:22,751 - INFO - 开始合并计算CPI...
+2025-05-18 16:11:22,781 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1824, in apply
+    result = self._python_apply_general(f, self._selected_obj)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1885, in _python_apply_general
+    values, mutated = self._grouper.apply_groupwise(f, data, self.axis)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\ops.py", line 919, in apply_groupwise
+    res = f(group)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 91, in <lambda>
+    lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+               ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 90, in calculate_cpi
+    cpi_result = merged.groupby('month').apply(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).reset_index(name='cpi')
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1846, in apply
+    return self._python_apply_general(f, self._obj_with_exclusions)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1885, in _python_apply_general
+    values, mutated = self._grouper.apply_groupwise(f, data, self.axis)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\ops.py", line 919, in apply_groupwise
+    res = f(group)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 91, in <lambda>
+    lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+               ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't multiply sequence by non-int of type 'float'
+2025-05-18 16:11:22,791 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1824, in apply
+    result = self._python_apply_general(f, self._selected_obj)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1885, in _python_apply_general
+    values, mutated = self._grouper.apply_groupwise(f, data, self.axis)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\ops.py", line 919, in apply_groupwise
+    res = f(group)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 91, in <lambda>
+    lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+               ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 218, in _na_arithmetic_op
+    result = func(left, right)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 242, in evaluate
+    return _evaluate(op, op_str, a, b)  # type: ignore[misc]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\computation\expressions.py", line 73, in _evaluate_standard
+    return op(a, b)
+TypeError: can't multiply sequence by non-int of type 'float'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 157, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 90, in calculate_cpi
+    cpi_result = merged.groupby('month').apply(
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ).reset_index(name='cpi')
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1846, in apply
+    return self._python_apply_general(f, self._obj_with_exclusions)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\groupby.py", line 1885, in _python_apply_general
+    values, mutated = self._grouper.apply_groupwise(f, data, self.axis)
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\groupby\ops.py", line 919, in apply_groupwise
+    res = f(group)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 91, in <lambda>
+    lambda x: (x['price_index'] * x['weight']).sum() / x['weight'].sum()
+               ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 283, in arithmetic_op
+    res_values = _na_arithmetic_op(left, right, op)  # type: ignore[arg-type]
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 227, in _na_arithmetic_op
+    result = _masked_arith_op(left, right, op)
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\ops\array_ops.py", line 163, in _masked_arith_op
+    result[mask] = op(xrav[mask], yrav[mask])
+                   ~~^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: can't multiply sequence by non-int of type 'float'
+2025-05-18 16:12:50,361 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:12:50,361 - INFO - 开始计算CPI...
+2025-05-18 16:12:53,919 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:12:57,590 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:12:57,689 - INFO - 获取到 225 个品类权重
+2025-05-18 16:12:57,690 - INFO - 开始合并计算CPI...
+2025-05-18 16:12:57,722 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 98, in calculate_cpi
+    raise ValueError("基期数据缺失，无法标准化")
+ValueError: 基期数据缺失，无法标准化
+2025-05-18 16:12:57,724 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 158, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 98, in calculate_cpi
+    raise ValueError("基期数据缺失，无法标准化")
+ValueError: 基期数据缺失，无法标准化
+2025-05-18 16:13:47,780 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:13:47,780 - INFO - 开始计算CPI...
+2025-05-18 16:13:51,455 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:13:54,966 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:13:55,018 - INFO - 获取到 225 个品类权重
+2025-05-18 16:13:55,018 - INFO - 开始合并计算CPI...
+2025-05-18 16:13:55,038 - ERROR - CPI计算过程中发生错误
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 98, in calculate_cpi
+    raise ValueError("基期数据缺失，无法标准化")
+ValueError: 基期数据缺失，无法标准化
+2025-05-18 16:13:55,039 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 158, in <module>
+    cpi_data = calculate_cpi()
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 98, in calculate_cpi
+    raise ValueError("基期数据缺失，无法标准化")
+ValueError: 基期数据缺失，无法标准化
+2025-05-18 16:18:13,996 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:18:13,996 - INFO - 开始计算CPI...
+2025-05-18 16:18:18,181 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:18:21,971 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:18:22,020 - INFO - 获取到 225 个品类权重
+2025-05-18 16:18:22,021 - INFO - 开始合并计算CPI...
+2025-05-18 16:18:22,054 - INFO - 使用动态基期: 2025-05-01
+2025-05-18 16:18:22,073 - INFO - CPI结果已保存到 output\cpi_results.csv
+2025-05-18 16:18:22,621 - INFO - CPI趋势图已保存到 output\cpi_trend.png
+2025-05-18 16:18:22,621 - INFO - ====== 程序执行成功 ======
+2025-05-18 16:20:20,464 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:20:20,464 - INFO - 开始计算CPI...
+2025-05-18 16:20:24,319 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:20:28,123 - INFO - 获取到 8325 条月度价格记录
+2025-05-18 16:20:28,187 - INFO - 获取到 225 个品类权重
+2025-05-18 16:20:28,188 - INFO - 开始合并计算CPI...
+2025-05-18 16:20:28,209 - INFO - 使用动态基期: 2025-05-01
+2025-05-18 16:20:28,213 - INFO - CPI结果已保存到 output\cpi_results.csv
+2025-05-18 16:20:28,609 - INFO - CPI趋势图已保存到 output\cpi_trend.png
+2025-05-18 16:20:28,609 - INFO - ====== 程序执行成功 ======
+2025-05-18 16:24:52,767 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:24:52,767 - INFO - 开始计算month粒度CPI...
+2025-05-18 16:24:56,899 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:25:00,628 - INFO - 获取到 8325 条month粒度价格记录
+2025-05-18 16:25:00,680 - INFO - 获取到 225 个品类权重
+2025-05-18 16:25:00,680 - INFO - 开始合并计算month粒度CPI...
+2025-05-18 16:25:00,696 - INFO - 使用动态基期: 2025-05-01
+2025-05-18 16:25:00,697 - INFO - 开始计算day粒度CPI...
+2025-05-18 16:25:04,474 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:25:08,423 - INFO - 获取到 246375 条day粒度价格记录
+2025-05-18 16:25:08,474 - INFO - 获取到 225 个品类权重
+2025-05-18 16:25:08,474 - INFO - 开始合并计算day粒度CPI...
+2025-05-18 16:25:08,643 - INFO - 使用动态基期: 2025-05-17
+2025-05-18 16:25:08,663 - ERROR - 组合结果保存失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 178, in save_combined_results
+    combined = pd.merge_asof(
+        daily_data.sort_values('time_period_day'),
+    ...<3 lines>...
+        direction='nearest'
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 691, in merge_asof
+    op = _AsOfMerge(
+        left,
+    ...<13 lines>...
+        direction=direction,
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 1999, in __init__
+    _OrderedMerge.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        fill_method=None,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 1911, in __init__
+    _MergeOperation.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        sort=True,  # factorize sorts
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 786, in __init__
+    self.left_on, self.right_on = self._validate_left_right_on(left_on, right_on)
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 2072, in _validate_left_right_on
+    raise MergeError(
+    ...<2 lines>...
+    )
+pandas.errors.MergeError: Incompatible merge dtype, dtype('O') and dtype('O'), both sides must have numeric dtype
+2025-05-18 16:25:08,666 - CRITICAL - 程序执行失败
+Traceback (most recent call last):
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 208, in <module>
+    save_combined_results(monthly_data, daily_data)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\src\cpi_calculater.py", line 178, in save_combined_results
+    combined = pd.merge_asof(
+        daily_data.sort_values('time_period_day'),
+    ...<3 lines>...
+        direction='nearest'
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 691, in merge_asof
+    op = _AsOfMerge(
+        left,
+    ...<13 lines>...
+        direction=direction,
+    )
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 1999, in __init__
+    _OrderedMerge.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        fill_method=None,
+        ^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 1911, in __init__
+    _MergeOperation.__init__(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<9 lines>...
+        sort=True,  # factorize sorts
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 786, in __init__
+    self.left_on, self.right_on = self._validate_left_right_on(left_on, right_on)
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MSI-NB\PycharmProjects\PythonProject7\.venv\Lib\site-packages\pandas\core\reshape\merge.py", line 2072, in _validate_left_right_on
+    raise MergeError(
+    ...<2 lines>...
+    )
+pandas.errors.MergeError: Incompatible merge dtype, dtype('O') and dtype('O'), both sides must have numeric dtype
+2025-05-18 16:26:44,438 - INFO - ====== CPI计算程序开始 ======
+2025-05-18 16:26:44,438 - INFO - 开始计算month粒度CPI...
+2025-05-18 16:26:47,892 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:26:51,382 - INFO - 获取到 8325 条month粒度价格记录
+2025-05-18 16:26:51,441 - INFO - 获取到 225 个品类权重
+2025-05-18 16:26:51,441 - INFO - 开始合并计算month粒度CPI...
+2025-05-18 16:26:51,464 - INFO - 使用动态基期: 2025-05-01
+2025-05-18 16:26:51,466 - INFO - 开始计算day粒度CPI...
+2025-05-18 16:26:55,000 - INFO - 获取到 225 个品类的基期价格
+2025-05-18 16:26:59,455 - INFO - 获取到 246375 条day粒度价格记录
+2025-05-18 16:26:59,502 - INFO - 获取到 225 个品类权重
+2025-05-18 16:26:59,503 - INFO - 开始合并计算day粒度CPI...
+2025-05-18 16:27:00,093 - INFO - 使用动态基期: 2025-05-17
+2025-05-18 16:27:00,175 - INFO - 组合CPI结果已保存到 output\combined_cpi_results.csv
+2025-05-18 16:27:02,018 - INFO - 组合CPI趋势图已保存到 output\combined_cpi_trend.png
+2025-05-18 16:27:02,018 - INFO - ====== 程序执行成功 ======

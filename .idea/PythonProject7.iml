@@ -4,7 +4,11 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/raw" />
-      <excludeFolder url="file://$MODULE_DIR$/data" />
+      <excludeFolder url="file://$MODULE_DIR$/clickhouse-driver/build" />
+      <excludeFolder url="file://$MODULE_DIR$/clickhouse-driver/clickhouse_driver.egg-info" />
+      <excludeFolder url="file://$MODULE_DIR$/etc" />
+      <excludeFolder url="file://$MODULE_DIR$/root" />
+      <excludeFolder url="file://$MODULE_DIR$/test" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (PythonProject7)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

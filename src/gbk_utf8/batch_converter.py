@@ -30,7 +30,7 @@ def batch_convert(input_dir, output_dir, target_encoding="utf-8", buffer_size=65
 
 
 # 调用示例
-root_dir=Path(__file__).parent.parent.parent
-input_dir=root_dir/"raw"/"daily_price"
-output_dir=root_dir/"raw"/"utf"
+root_dir=Path(__file__).parent.parent.parent.parent
+input_dir=root_dir/"data"/"daily_price"
+output_dir=root_dir/"data"/"utf"
 batch_convert(input_dir, output_dir, target_encoding="utf-8")
