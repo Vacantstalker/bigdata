@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/etc" />
       <excludeFolder url="file://$MODULE_DIR$/root" />
       <excludeFolder url="file://$MODULE_DIR$/test" />
+      <excludeFolder url="file://$MODULE_DIR$/clickhouse-driver" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 (PythonProject7)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

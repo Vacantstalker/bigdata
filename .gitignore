@@ -21,5 +21,6 @@ config.py
 settings.yml
 test01.py
 
-clickhouse-driver/
 data/
+clickhouse-driver/
+output/
