@@ -7,7 +7,11 @@
     <list default="true" id="de2497c5-41f2-481b-a289-25a43895706d" name="更改" comment="0.0.1">
       <change afterPath="$PROJECT_DIR$/src/cleaner.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/clickhouse_connector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/clickhouse_connector1.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/cpi_calculater.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cpi_calculator.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/output/combined_cpi_results.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/output/combined_cpi_trend.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/PythonProject7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PythonProject7.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -1108,7 +1112,7 @@
       <change beforePath="$PROJECT_DIR$/data/daily_price/daily_prices_20280514.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/daily_price/daily_prices_20280515.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/products.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clickhouse_conneter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/clickhouse_connector1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clickhouse_conneter.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gbk_utf8/batch_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/gbk_utf8/batch_converter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
